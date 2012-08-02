@@ -47,7 +47,7 @@ Examples: Read Note, Play Song, Send Mail.
 ### Assignment
 
 
-An assigment links a user and role. 
+An assignment links a user and role. 
 
 Example: Alice is assigned the admin role.
 
@@ -189,10 +189,10 @@ An assignment is an association between one user and one role.
 We can traverse the assignments:
 
     # Get a user's assignments
-    alice.assigments #=> [array of assignments]
+    alice.assignments #=> [array of assignments]
 
     # Traverse
-    alice.assigments.first.role #=> admin
+    alice.assignments.first.role #=> admin
 
     # Get a role's assignments
     admin.assignments #=> [array of assignments]
