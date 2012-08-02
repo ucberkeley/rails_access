@@ -1,4 +1,4 @@
-# UC Berkely » Rails » Access control engine using RBAC
+# Rails access control engine using RBAC
 
 * Repo: <http://github.com/ucberkeley/rails_access>
 * Contact: Joel Parker Henderson, <joelparkerhenderson@berkeley.edu>
