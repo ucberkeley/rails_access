@@ -2,50 +2,51 @@ require 'test_helper'
 
 module Access
   class AssignmentsControllerTest < ActionController::TestCase
+
     setup do
-      @assignment = assignments(:one)
+      #TODO change to use fixtures
+      @assignment = Assignment.create!
     end
   
     test "should get index" do
-      get :index
+      get :index, :use_route => :access
       assert_response :success
       assert_not_nil assigns(:assignments)
     end
   
     test "should get new" do
-      get :new
+      get :new, :use_route => :access
       assert_response :success
     end
-  
+
     test "should create assignment" do
       assert_difference('Assignment.count') do
-        post :create, assignment: {  }
+        post :create, assignment: {  }, :use_route => :access 
       end
-  
       assert_redirected_to assignment_path(assigns(:assignment))
     end
-  
+
     test "should show assignment" do
-      get :show, id: @assignment
+      get :show, id: @assignment, :use_route => :access 
       assert_response :success
     end
   
     test "should get edit" do
-      get :edit, id: @assignment
+      get :edit, :use_route => :access, id: @assignment
       assert_response :success
     end
   
     test "should update assignment" do
-      put :update, id: @assignment, assignment: {  }
+      put :update, :use_route => :access, id: @assignment, assignment: {  }
       assert_redirected_to assignment_path(assigns(:assignment))
     end
-  
+
     test "should destroy assignment" do
       assert_difference('Assignment.count', -1) do
-        delete :destroy, id: @assignment
+        delete :destroy, :use_route => :access, id: @assignment
       end
-  
       assert_redirected_to assignments_path
     end
+
   end
 end
