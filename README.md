@@ -3,7 +3,9 @@
 * Repo: <http://github.com/ucberkeley/rails_access>
 * Contact: Joel Parker Henderson, <joelparkerhenderson@berkeley.edu>
 
+
 ## Introduction
+
 
 Role Based Access Control (RBAC) is an approach to authorization of users and systems.
 
@@ -18,6 +20,7 @@ A simple text diagram of the connections:
 
 ### User
 
+
 A user is a tyipcally a person.
 
 Examples: Alice, Bob, Carol.
@@ -27,12 +30,14 @@ This is provided by your application, rather than this engine. See more about th
 
 ### Role
 
+
 A role is typically a job function.
 
 Examples: Admin, Teacher, Student.
 
 
 ### Operation
+
 
 An operation is an application capability. 
 
@@ -41,6 +46,7 @@ Examples: Read Note, Play Song, Send Mail.
 
 ### Assignment
 
+
 An assigment links a user and role. 
 
 Example: Alice is assigned the admin role.
@@ -48,11 +54,10 @@ Example: Alice is assigned the admin role.
 
 ### Permission
 
+
 A permission links a role and operation. 
 
 Example: an admin has permission to read notes.
-
-
 
 
 ##  Models
@@ -66,12 +71,14 @@ User model:
        has_many :roles, :through => :assignments
     end
 
+
 Assignment model:
 
     class Assignment
        belongs_to :user
        belongs_to :role
     end
+
 
 Role model:
 
@@ -82,12 +89,14 @@ Role model:
        has_many :operations, :through => :permissions
     end
 
+
 Permission model:
 
     class Permission
        belongs_to :role
        belongs_to :operation
     end
+
 
 Operation model:
 
@@ -100,6 +109,7 @@ Operation model:
 
 ### Your app provides the User model
 
+
 This Rails engine assumes that your application provides a model called "User", and that you can add the two lines of code to your model to connect it to this engine.
 
 We are building the engine this way to make it easy to add to our existing applications, which already have a User model.
@@ -107,11 +117,11 @@ We are building the engine this way to make it easy to add to our existing appli
 We're considering making this configurable for different model names, such as "Person". If this is something you need, feel free to contact us and also we're happy to add pull requests.
 
 
-
 ## Code examples
 
 
 ### User examples
+
 
 For the alice user:
 
@@ -124,7 +134,9 @@ For the alice user:
     # Deassign
     alice.roles -= admin
 
+
 ### Role examples
+
 
 For the admin role:
 
@@ -146,7 +158,9 @@ For the admin role:
     # Revoke permission
     admin.operations -= create_note
 
+
 ### Operation examples 
+
 
 For the read_note operation:
 
@@ -160,35 +174,60 @@ For the read_note operation:
     read_note.roles -= admin
 
 
-### Advanced examples
+### Assignment examples
 
-To do more advanced work with associations:
+
+An assignment is an association between one user and one role. 
+
+    # Get user
+    assignment.user #=> alice
+
+    # Get role
+    assignment.role #=> admin
+
+
+We can traverse the assignments:
 
     # Get a user's assignments
     alice.assigments #=> [array of assignments]
 
-    # Get a user's assignment's role 
-    alice.assignments.first.role #=> [admin]
-    
+    # Traverse
+    alice.assigments.first.role #=> admin
+
     # Get a role's assignments
     admin.assignments #=> [array of assignments]
+    
+    # Traverse
+    admin.assignments.first.user #=> alice
 
-    # Get a role's assignment's user
-    admin.assignemnts.first.user #=> [alice]
+
+### Permission example
+
+
+A permission is an association between one role and one operation. 
+
+    # Get role
+    permission.role #=> admin
+    
+    # Get operation
+    permission.operation #=> read_note
+
+
+We can traverse the permissions:
 
     # Get a role's permissions
     admin.permissions #=> [array of permissions]
 
-    # Get a role's permission's operation
-    admin.permission.first.operation #=> [read_note]
-
+    # Traverse
+    admin.permissions.first.operation #=> read_note
+    
     # Get an operation's permissions
     read_note.permissions #=> [array of permissions]
 
-    # Get an operation's permission's role
-    read_note.permissions.first.role #=> [admin]
-
-
+    # Traverse
+    read_note.permissions.first.role #=> admin
+    
+    
 ## Installing the engine
 
 
