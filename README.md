@@ -73,6 +73,15 @@ Assignment model:
        belongs_to :role
     end
 
+Role model:
+
+    class Role
+       has_many :assignments
+       has_many :users, :through => :assignments
+       has_many :permissions
+       has_many :operations, :through => :permissions
+    end
+
 Permission model:
 
     class Permission
