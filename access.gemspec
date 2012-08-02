@@ -7,11 +7,11 @@ require "access/version"
 Gem::Specification.new do |s|
   s.name        = "access"
   s.version     = Access::VERSION
-  s.authors     = ["TODO: Your name"]
-  s.email       = ["TODO: Your email"]
-  s.homepage    = "TODO"
-  s.summary     = "TODO: Summary of Access."
-  s.description = "TODO: Description of Access."
+  s.authors     = ["Joel Parker Henderson"]
+  s.email       = ["joel@sixarm.com"]
+  s.homepage    = "http://sixarm.com"
+  s.summary     = "RBAC provides Role Based Access Control."
+  s.description = "RBAC provides Role Based Access Control for authorization with users, assignments, roles, permissions, and operations."
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
