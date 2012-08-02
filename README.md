@@ -1,15 +1,15 @@
-# SixArm.com » Rails » <br> Role Based Access Control (RBAC)
+# UC Berkely » Rails » Access control engine using RBAC concepts
 
-* Doc: <http://sixarm.com/sixarm_rails_rbac/doc>
-* Gem: <http://rubygems.org/gems/sixarm_rails_rbac>
-* Repo: <http://github.com/sixarm/sixarm_rails_rbac>
-* Email: Joel Parker Henderson, <joel@sixarm.com>
+* Repo: <http://github.com/ucberkeley/rails_access>
+* Contact: Joel Parker Henderson, <joelparkerhenderson@berkeley.edu>
 
 ## Introduction
 
-Role Based Access Control (RBAC) works with users, assignments, roles, permissions, and operations.
+Role Based Access Control (RBAC) is an approach to authorization of users and systems.
 
 To read a general introduction to RBAC: http://en.wikipedia.org/wiki/Role-based_access_control
+
+This repo is a simple access control engine using Ruby on Rails 3.2.7. It is an experimental work-in-progress and we're making it public to help other Rails engine creators.
 
 
 ### User
@@ -24,7 +24,7 @@ A role is typically a job function. Examples: Administrator, Teacher, Student.
 
 ### Operation
 
-An operation is an application capability. Examples: "Read Note", "Play Song", "Send Mail", 
+An operation is an application capability. Examples: "Read Note", "Play Song", "Send Mail",
 
 
 ### Assignment
@@ -42,15 +42,6 @@ A permission links a role and operation. Example: an Administrator has permissio
 A simple text diagram of the connections:
 
     User <--> Assignment <--> Role <--> Permission <--> Operation
-
-
-## Rails generators
-
-    rails generate scaffold role name:string description:string
-    rails generate scaffold operation name:string description:string
-    rails generate scaffold assignment user:references role:references
-    rails generate scaffold permission role:references operation:references
-
 
 
 ## Installing the engine
