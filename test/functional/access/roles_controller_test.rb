@@ -4,8 +4,7 @@ module Access
   class RolesControllerTest < ActionController::TestCase
 
     setup do
-      #TODO change to use fixtures
-      @role = Role.create!
+      @role = access_roles(:one)
     end
   
     test "should get index" do

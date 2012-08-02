@@ -4,8 +4,7 @@ module Access
   class OperationsControllerTest < ActionController::TestCase
 
     setup do
-      #TODO change to use fixtures
-      @operation = Operation.create!
+      @operation = access_operations(:one)
     end
   
     test "should get index" do

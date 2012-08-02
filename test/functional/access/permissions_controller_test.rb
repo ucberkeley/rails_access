@@ -4,8 +4,7 @@ module Access
   class PermissionsControllerTest < ActionController::TestCase
 
     setup do
-      #TODO change to use fixtures
-      @permission = Permission.create!
+      @permission = access_permissions(:one)
     end
   
     test "should get index" do

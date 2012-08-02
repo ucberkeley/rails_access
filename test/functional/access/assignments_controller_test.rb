@@ -4,8 +4,7 @@ module Access
   class AssignmentsControllerTest < ActionController::TestCase
 
     setup do
-      #TODO change to use fixtures
-      @assignment = Assignment.create!
+      @assignment = access_assignments(:one)
     end
   
     test "should get index" do

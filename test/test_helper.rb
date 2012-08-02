@@ -9,15 +9,24 @@ Rails.backtrace_cleaner.remove_silencers!
 # Load support files
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-# Load fixtures from the engine for functional tests
+
+### Load fixtures via the engine for all our tests
+
 if ActiveSupport::TestCase.method_defined?(:fixture_path=)
   ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
+  ActiveSupport::TestCase.fixtures :all
 end
 
-# Load fixtures from the engine for integration tests
-if ActionDispatch::IntegrationTest.method_defined?(:fixture_path=)
-  ActionDispatch::IntegrationTest.fixture_path = File.expand_path("../fixtures", __FILE__)
+if ActionController::TestCase.method_defined?(:fixture_path=)
+  ActionController::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
+  ActionController::TestCase.fixtures :all
 end
+
+if ActionDispatch::IntegrationTest.method_defined?(:fixture_path=)
+  ActionDispatch::IntegrationTest.fixture_path = File.expand_path("../fixture", __FILE__)
+  ActionDispatch::IntegrationTest.fixtures :all
+end
+
 
 # Patch TestCase to provide routes: 
 # See https://github.com/rails/rails/issues/6573
