@@ -18,7 +18,7 @@ A user is a tyipcally a person.
 
 Examples: Alice, Bob, Carol.
 
-This is provided by your application, rather than this engine.
+This is provided by your application, rather than this engine. See more about this below.
 
 
 ### Role
@@ -30,17 +30,23 @@ Examples: Admin, Teacher, Student.
 
 ### Operation
 
-An operation is an application capability. Examples: "Read Note", "Play Song", "Send Mail",
+An operation is an application capability. 
+
+Examples: Read Note, Play Song, Send Mail.
 
 
 ### Assignment
 
-An assigment links a user and role. Example: Alice is assigned the admin role.
+An assigment links a user and role. 
+
+Example: Alice is assigned the admin role.
 
 
 ### Permission
 
-A permission links a role and operation. Example: an Admin has permission to read notes.
+A permission links a role and operation. 
+
+Example: an admin has permission to read notes.
 
 
 ## Usage
