@@ -102,7 +102,7 @@ We're considering making this configurable for different model names, such as "P
 ## Code examples
 
 
-User examples for Alice:
+User examples for the alice user:
 
     # Get roles
     alice.roles #=> [admin, developer]
@@ -113,7 +113,7 @@ User examples for Alice:
     # Deassign
     alice.roles -= admin
 
-Role examples for Admin:
+Role examples for the admin role:
 
     # Get users:
     admin.users #=> [alice]
@@ -133,7 +133,7 @@ Role examples for Admin:
     # Revoke permission
     admin.operations -= create_note
 
-Operation examples for Create:
+Operation examples for the read_note operation:
 
     # Get roles
     read_note.roles #=> [admin]
