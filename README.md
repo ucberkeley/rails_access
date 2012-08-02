@@ -11,6 +11,10 @@ To read a general introduction to RBAC: http://en.wikipedia.org/wiki/Role-based_
 
 This repo is a simple access control engine using Ruby on Rails 3.2.7. It is an experimental work-in-progress and we're making it public to help other Rails engine creators.
 
+A simple text diagram of the connections:
+
+    User <--> Assignment <--> Role <--> Permission <--> Operation
+
 
 ### User
 
@@ -49,15 +53,9 @@ A permission links a role and operation.
 Example: an admin has permission to read notes.
 
 
-## Usage
 
 
-A simple text diagram of the connections:
-
-    User <--> Assignment <--> Role <--> Permission <--> Operation
-
-
-###  Models
+##  Models
 
 
 User model:
@@ -101,7 +99,7 @@ We're considering making this configurable for different model names, such as "P
 
 
 
-### Code examples
+## Code examples
 
 
 User examples for Alice:
@@ -127,38 +125,38 @@ Role examples for Admin:
     admin -= alice
 
     # Get operations
-    admin.operations #=> [create, read, update, delete]
+    admin.operations #=> [create_note, read_note, update_note, delete_note]
 
     # Grant permission
-    admin.operations += create
+    admin.operations += create_note
 
     # Revoke permission
-    admin.operations -= create
+    admin.operations -= create_note
 
 Operation examples for Create:
 
     # Get roles
-    create.roles #=> [admin]
+    read_note.roles #=> [admin]
 
     # Grant permission
-    create.roles += admin
+    read_note.roles += admin
 
     # Revoke permission
-    create roles -= admin
+    read_note.roles -= admin
 
 To do more advanced work with associations:
 
     # Get a user's assignments
-    alice.assigments
+    alice.assigments #=> [array of assignments]
 
     # Get a role's assignments
-    admin.assignments
+    admin.assignments #=> [array of assignments]
 
     # Get a role's permissions
-    admin.permissions =>
+    admin.permissions #=> [array of permissions]
 
     # Get an operation's permissions
-    create.permissions
+    read_note.permissions #=> [array of permissions]
 
 
 ## Installing the engine
