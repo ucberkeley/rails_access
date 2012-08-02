@@ -3,8 +3,7 @@ class CreateAccessRoles < ActiveRecord::Migration
     create_table :access_roles do |t|
       t.string :name
       t.string :description
-
-      t.timestamps
     end
+    add_index :access_roles, :name
   end
 end

@@ -3,8 +3,7 @@ class CreateAccessOperations < ActiveRecord::Migration
     create_table :access_operations do |t|
       t.string :name
       t.string :description
-
-      t.timestamps
     end
+    add_index :access_operations, :name
   end
 end
