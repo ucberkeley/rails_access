@@ -111,7 +111,9 @@ We're considering making this configurable for different model names, such as "P
 ## Code examples
 
 
-User examples for the alice user:
+### User examples
+
+For the alice user:
 
     # Get roles
     alice.roles #=> [admin, developer]
@@ -122,7 +124,9 @@ User examples for the alice user:
     # Deassign
     alice.roles -= admin
 
-Role examples for the admin role:
+### Role examples
+
+For the admin role:
 
     # Get users:
     admin.users #=> [alice]
@@ -142,7 +146,9 @@ Role examples for the admin role:
     # Revoke permission
     admin.operations -= create_note
 
-Operation examples for the read_note operation:
+### Operation examples 
+
+For the read_note operation:
 
     # Get roles
     read_note.roles #=> [admin]
@@ -153,19 +159,34 @@ Operation examples for the read_note operation:
     # Revoke permission
     read_note.roles -= admin
 
+
+### Advanced examples
+
 To do more advanced work with associations:
 
     # Get a user's assignments
     alice.assigments #=> [array of assignments]
 
+    # Get a user's assignment's role 
+    alice.assignments.first.role #=> [admin]
+    
     # Get a role's assignments
     admin.assignments #=> [array of assignments]
+
+    # Get a role's assignment's user
+    admin.assignemnts.first.user #=> [alice]
 
     # Get a role's permissions
     admin.permissions #=> [array of permissions]
 
+    # Get a role's permission's operation
+    admin.permission.first.operation #=> [read_note]
+
     # Get an operation's permissions
     read_note.permissions #=> [array of permissions]
+
+    # Get an operation's permission's role
+    read_note.permissions.first.role #=> [admin]
 
 
 ## Installing the engine
