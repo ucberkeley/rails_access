@@ -3,7 +3,9 @@
 * Repo: <http://github.com/ucberkeley/rails_access>
 * Contact: Joel Parker Henderson, <joelparkerhenderson@berkeley.edu>
 
+
 ## Introduction
+
 
 Role Based Access Control (RBAC) is an approach to authorization of users and systems.
 
@@ -11,17 +13,23 @@ To read a general introduction to RBAC: http://en.wikipedia.org/wiki/Role-based_
 
 This repo is a simple access control engine using Ruby on Rails 3.2.7. It is an experimental work-in-progress and we're making it public to help other Rails engine creators.
 
+A simple text diagram of the connections:
+
+    User <--> Assignment <--> Role <--> Permission <--> Operation
+
 
 ### User
+
 
 A user is a tyipcally a person.
 
 Examples: Alice, Bob, Carol.
 
-This is provided by your application, rather than this engine.
+This is provided by your application, rather than this engine. See more about this below.
 
 
 ### Role
+
 
 A role is typically a job function.
 
@@ -30,28 +38,29 @@ Examples: Admin, Teacher, Student.
 
 ### Operation
 
-An operation is an application capability. Examples: "Read Note", "Play Song", "Send Mail",
+
+An operation is an application capability.
+
+Examples: Read Note, Play Song, Send Mail.
 
 
 ### Assignment
 
-An assigment links a user and role. Example: Alice is assigned the admin role.
+
+An assignment links a user and role.
+
+Example: Alice is assigned the admin role.
 
 
 ### Permission
 
-A permission links a role and operation. Example: an Admin has permission to read notes.
+
+A permission links a role and operation.
+
+Example: an admin has permission to read notes.
 
 
-## Usage
-
-
-A simple text diagram of the connections:
-
-    User <--> Assignment <--> Role <--> Permission <--> Operation
-
-
-###  Models
+##  Models
 
 
 User model:
@@ -62,6 +71,7 @@ User model:
        has_many :roles, :through => :assignments
     end
 
+
 Assignment model:
 
     class Assignment
@@ -69,12 +79,24 @@ Assignment model:
        belongs_to :role
     end
 
+
+Role model:
+
+    class Role
+       has_many :assignments
+       has_many :users, :through => :assignments
+       has_many :permissions
+       has_many :operations, :through => :permissions
+    end
+
+
 Permission model:
 
     class Permission
        belongs_to :role
        belongs_to :operation
     end
+
 
 Operation model:
 
@@ -87,6 +109,7 @@ Operation model:
 
 ### Your app provides the User model
 
+
 This Rails engine assumes that your application provides a model called "User", and that you can add the two lines of code to your model to connect it to this engine.
 
 We are building the engine this way to make it easy to add to our existing applications, which already have a User model.
@@ -94,11 +117,13 @@ We are building the engine this way to make it easy to add to our existing appli
 We're considering making this configurable for different model names, such as "Person". If this is something you need, feel free to contact us and also we're happy to add pull requests.
 
 
+## Code examples
 
-### Code examples
+
+### User examples
 
 
-User examples for Alice:
+For the alice user:
 
     # Get roles
     alice.roles #=> [admin, developer]
@@ -109,7 +134,11 @@ User examples for Alice:
     # Deassign
     alice.roles -= [admin]
 
-Role examples for Admin:
+
+### Role examples
+
+
+For the admin role:
 
     # Get users:
     admin.users #=> [alice]
@@ -121,38 +150,82 @@ Role examples for Admin:
     admin -= [alice]
 
     # Get operations
-    admin.operations #=> [create, read, update, delete]
+    admin.operations #=> [create_note, read_note, update_note, delete_note]
 
     # Grant permission
-    admin.operations += [create]
+    admin.operations += [create_note]
 
     # Revoke permission
-    admin.operations -= [create]
+    admin.operations -= [create_note]
 
-Operation examples for Create:
+
+### Operation examples
+
+
+For the read_note operation:
 
     # Get roles
-    create.roles #=> [admin]
+    read_note.roles #=> [admin]
 
     # Grant permission
-    create.roles += [admin]
+    read_note.roles += [admin]
 
     # Revoke permission
-    create roles -= [admin]
+    read_note.roles -= [admin]
 
-To do more advanced work with associations:
+
+### Assignment examples
+
+
+An assignment is an association between one user and one role.
+
+    # Get user
+    assignment.user #=> alice
+
+    # Get role
+    assignment.role #=> admin
+
+
+We can traverse the assignments:
 
     # Get a user's assignments
-    alice.assigments
+    alice.assignments #=> [array of assignments]
+
+    # Traverse
+    alice.assignments.first.role #=> admin
 
     # Get a role's assignments
-    admin.assignments
+    admin.assignments #=> [array of assignments]
+
+    # Traverse
+    admin.assignments.first.user #=> alice
+
+
+### Permission example
+
+
+A permission is an association between one role and one operation.
+
+    # Get role
+    permission.role #=> admin
+
+    # Get operation
+    permission.operation #=> read_note
+
+
+We can traverse the permissions:
 
     # Get a role's permissions
-    admin.permissions
+    admin.permissions #=> [array of permissions]
+
+    # Traverse
+    admin.permissions.first.operation #=> read_note
 
     # Get an operation's permissions
-    create.permissions
+    read_note.permissions #=> [array of permissions]
+
+    # Traverse
+    read_note.permissions.first.role #=> admin
 
 
 ## Installing the engine
