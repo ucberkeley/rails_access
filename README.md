@@ -104,10 +104,10 @@ User examples for Alice:
     alice.roles #=> [admin, developer]
 
     # Assign
-    alice.roles += admin
+    alice.roles += [admin]
 
     # Deassign
-    alice.roles -= admin
+    alice.roles -= [admin]
 
 Role examples for Admin:
 
@@ -115,19 +115,19 @@ Role examples for Admin:
     admin.users #=> [alice]
 
     # Assign
-    admin += alice
+    admin += [alice]
 
     # Deassign
-    admin -= alice
+    admin -= [alice]
 
     # Get operations
     admin.operations #=> [create, read, update, delete]
 
     # Grant permission
-    admin.operations += create
+    admin.operations += [create]
 
     # Revoke permission
-    admin.operations -= create
+    admin.operations -= [create]
 
 Operation examples for Create:
 
@@ -135,10 +135,10 @@ Operation examples for Create:
     create.roles #=> [admin]
 
     # Grant permission
-    create.roles += admin
+    create.roles += [admin]
 
     # Revoke permission
-    create roles -= admin
+    create roles -= [admin]
 
 To do more advanced work with associations:
 
@@ -149,7 +149,7 @@ To do more advanced work with associations:
     admin.assignments
 
     # Get a role's permissions
-    admin.permissions =>
+    admin.permissions
 
     # Get an operation's permissions
     create.permissions

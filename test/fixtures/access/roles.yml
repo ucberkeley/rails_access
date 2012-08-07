@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  description: MyString
+  key: role_key_1
+  name: Role Name 1
+  description: Role Description 1
 
 two:
-  name: MyString
-  description: MyString
+  key: role_key_2
+  name: Role Name 2
+  description: Role Description 2

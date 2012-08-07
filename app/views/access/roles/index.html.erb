@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Key</th>
     <th>Name</th>
     <th>Description</th>
     <th></th>
@@ -11,6 +12,7 @@
 
 <% @roles.each do |role| %>
   <tr>
+    <td><%= role.key %></td>
     <td><%= role.name %></td>
     <td><%= role.description %></td>
     <td><%= link_to 'Show', role %></td>

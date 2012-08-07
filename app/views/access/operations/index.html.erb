@@ -2,6 +2,7 @@
 
 <table>
   <tr>
+    <th>Key</th>
     <th>Name</th>
     <th>Description</th>
     <th></th>
@@ -11,6 +12,7 @@
 
 <% @operations.each do |operation| %>
   <tr>
+    <td><%= operation.key %></td>
     <td><%= operation.name %></td>
     <td><%= operation.description %></td>
     <td><%= link_to 'Show', operation %></td>
