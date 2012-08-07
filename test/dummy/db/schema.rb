@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20120802002109) do
   add_index "access_assignments", ["user_id"], :name => "index_access_assignments_on_user_id"
 
   create_table "access_operations", :force => true do |t|
+    t.string "key"
     t.string "name"
     t.string "description"
   end
@@ -37,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20120802002109) do
   add_index "access_permissions", ["role_id"], :name => "index_access_permissions_on_role_id"
 
   create_table "access_roles", :force => true do |t|
+    t.string "key"
     t.string "name"
     t.string "description"
   end
