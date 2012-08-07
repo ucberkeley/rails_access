@@ -15,3 +15,10 @@ gem "jquery-rails"
 
 # To use debugger
 # gem 'debugger'
+
+gem 'require_all'
+
+group :test do
+  gem 'mocha'
+
+end
